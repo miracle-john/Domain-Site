@@ -1,0 +1,74 @@
+RAG(Retrieval-Augmented Generation)
+  질문
+   │
+   ▼
+Vector DB 검색
+   │
+관련 문서
+   │
+   ▼
+LLM
+   │
+답변 생성
+TAG(Table-Augmented Generation)
+  질문
+   │
+   ▼
+SQL 생성
+   │
+Database 조회
+   │
+결과(Table)
+   │
+   ▼
+LLM
+   │
+답변 생성
+
+Hybrid RAG: 문서(RAG)와 데이터베이스(TAG/Text-to-SQL)를 함께 사용하는 방식:
+
+Fine-tuning
+기존 GPT
+      │
+학습 데이터(JSONL)
+      │
+Fine-tuning
+      │
+사용자 전용 모델
+
+
+<권장 아키텍처>
+             사용자 질문
+                  │
+                  ▼
+          질문 의도 분석(LMM)
+                  │
+        ┌─────────┴─────────┐
+        │                   │
+        ▼                   ▼
+  용어 검색(RAG)      테이블 조회(TAG)
+        │                   │
+        └─────────┬─────────┘
+                  ▼
+           GPT 답변 생성
+                  │
+                  ▼
+      백과사전 형식으로 출력
+--------------------------------------
+<AI 백과사전>
+
+           사용자
+              │
+              ▼
+        Intent 분석
+              │
+      ┌───────┴────────┐
+      │                │
+      ▼                ▼
+     RAG           Text-to-SQL
+      │                │
+      └───────┬────────┘
+              ▼
+      Domain SLLM
+              │
+       백과사전 출력
